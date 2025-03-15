@@ -4,7 +4,6 @@
 
 This project implements a complete ETL (Extract, Transform, Load) pipeline that fetches data from the REST Countries API, processes it through a sophisticated transformation layer, stores it in a PostgreSQL database, and exposes the data through a well-designed RESTful API. The implementation follows industry best practices for code organization, error handling, and performance optimization.
 
-![Project Architecture](https://i.imgur.com/IEV2Nm7.png)
 
 ## Background
 
@@ -158,4 +157,67 @@ The ETL process runs:
 ####GetWithPagination 
 #### TestServer
 #### check the ETL running server
+
+# API Documentation 🚀
+
+This project includes tested API collections using **Bruno**.
+
+---
+## 📌 Bruno Collection Location
+
+All tested API collections are stored in:
+
+```bash
+collections/ggi-be-task/
+├── Basic Pagination.bru
+├── ByPartialName.bru
+├── ByRegion.bru
+├── Filter&Pagination.bru
+├── Login.bru
+├── OpenWeatherMap.bru
+├── REST Countries.bru
+├── RestCountries Node.bru
+├── Signup.bru
+├── SmallerPagination.bru
+├── Test-Server.bru
+├── bruno.json
+
+
+## 📌 Tested API Endpoints
+
+| API Name               | Description |
+|------------------------|------------|
+| **Basic Pagination**   | API with pagination testing |
+| **ByPartialName**      | Search API by partial name |
+| **ByRegion**          | Fetch countries by region |
+| **Filter & Pagination** | API with filtering and pagination |
+| **Login**             | User authentication API |
+| **OpenWeatherMap**    | Weather API integration |
+| **REST Countries**    | REST API for country data |
+| **RestCountries Node** | Node.js-based country API |
+| **Signup**            | User registration API |
+| **Smaller Pagination** | Pagination with smaller page size |
+| **Test-Server**       | Test server for various requests |
+
+---
+
+## 📌 How to Use the API Collection in Bruno
+
+1. **Install Bruno**:  
+   👉 [Download Bruno](https://www.usebruno.com/) and install it on your system.
+
+2. **Import the API Collection**:  
+   - Open Bruno and go to **"Import Collection"**.
+   - Select the **`collections/ggi-be-task/`** folder.
+   - Choose the `.bru` files.
+
+3. **Run API Tests**:  
+   - Click on any API request.
+   - Adjust parameters if needed.
+   - Hit **"Send"** and check the response.
+
+---
+
+## 📌 Bruno Collection Location
+All tested API collections are stored in:
 
