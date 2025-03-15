@@ -1,13 +1,12 @@
 import { Request, Response } from 'express';
 import { pool } from '../db/connection';
 import { runETLJob } from '../scheduler/jobs';
+import { ConsoleLogger } from '../utils/logging/consoleLogger';
+
+const logger = new ConsoleLogger();
 
 /**
  * Get all countries with optional filtering and pagination
- * Handles:
- * - /data (all records)
- * - /data?filter=<criteria> (filtered records)
- * - /data?page=N&limit=M (paginated records)
  */
 export async function getAllCountries(req: Request, res: Response): Promise<void> {
   try {
@@ -15,21 +14,25 @@ export async function getAllCountries(req: Request, res: Response): Promise<void
     const filter = req.query.filter as string | undefined;
     const page = req.query.page ? parseInt(req.query.page as string, 10) : 1;
     const limit = req.query.limit ? parseInt(req.query.limit as string, 10) : 10;
-    
+
+    logger.log(
+      `Fetching countries with filter: ${filter || 'none'}, page: ${page}, limit: ${limit}`
+    );
+
     // Validate pagination parameters
     if (isNaN(page) || page < 1) {
       res.status(400).json({ error: 'Invalid page parameter' });
       return;
     }
-    
+
     if (isNaN(limit) || limit < 1 || limit > 100) {
       res.status(400).json({ error: 'Invalid limit parameter. Must be between 1 and 100' });
       return;
     }
-    
+
     // Calculate offset
     const offset = (page - 1) * limit;
-    
+
     // Build the base query
     let query = `
       SELECT 
@@ -62,7 +65,7 @@ export async function getAllCountries(req: Request, res: Response): Promise<void
         ) as languages
       FROM countries c
     `;
-    
+
     // Add filter if provided
     const queryParams: any[] = [];
     if (filter) {
@@ -75,24 +78,26 @@ export async function getAllCountries(req: Request, res: Response): Promise<void
       `;
       queryParams.push(`%${filter}%`);
     }
-    
+
     // Get total count for pagination metadata
     const countQuery = `
       SELECT COUNT(*) 
       FROM countries c
       ${filter ? 'WHERE c.name ILIKE $1 OR c.official_name ILIKE $1 OR c.region ILIKE $1 OR c.subregion ILIKE $1' : ''}
     `;
-    
+
     const countResult = await pool.query(countQuery, filter ? [`%${filter}%`] : []);
     const totalCount = parseInt(countResult.rows[0].count, 10);
-    
+
     // Add pagination
     query += ` ORDER BY c.name LIMIT $${queryParams.length + 1} OFFSET $${queryParams.length + 2}`;
     queryParams.push(limit, offset);
-    
+
     // Execute the query
     const result = await pool.query(query, queryParams);
-    
+
+    logger.log(`Fetched ${result.rows.length} countries from the database`);
+
     // Return the results with pagination metadata
     res.status(200).json({
       data: result.rows,
@@ -102,11 +107,11 @@ export async function getAllCountries(req: Request, res: Response): Promise<void
         totalCount,
         totalPages: Math.ceil(totalCount / limit),
         hasNextPage: page * limit < totalCount,
-        hasPreviousPage: page > 1
-      }
+        hasPreviousPage: page > 1,
+      },
     });
   } catch (error) {
-    console.error('Error fetching countries:', error);
+    logger.error(`Error fetching countries: ${error}`);
     res.status(500).json({ error: 'Internal server error' });
   }
 }
@@ -117,12 +122,14 @@ export async function getAllCountries(req: Request, res: Response): Promise<void
 export async function getCountryById(req: Request, res: Response): Promise<void> {
   try {
     const id = parseInt(req.params.id, 10);
-    
+
     if (isNaN(id)) {
       res.status(400).json({ error: 'Invalid ID parameter' });
       return;
     }
-    
+
+    logger.log(`Fetching country with ID: ${id}`);
+
     const query = `
       SELECT 
         c.id, 
@@ -155,17 +162,18 @@ export async function getCountryById(req: Request, res: Response): Promise<void>
       FROM countries c
       WHERE c.id = $1
     `;
-    
+
     const result = await pool.query(query, [id]);
-    
+
     if (result.rows.length === 0) {
+      logger.error(`Country with ID ${id} not found`);
       res.status(404).json({ error: 'Country not found' });
       return;
     }
-    
+
     res.status(200).json(result.rows[0]);
   } catch (error) {
-    console.error('Error fetching country:', error);
+    logger.error(`Error fetching country by ID: ${error}`);
     res.status(500).json({ error: 'Internal server error' });
   }
 }
@@ -175,15 +183,18 @@ export async function getCountryById(req: Request, res: Response): Promise<void>
  */
 export async function runETLManually(req: Request, res: Response): Promise<void> {
   try {
+    logger.log('Manually triggering ETL process...');
     const success = await runETLJob();
-    
+
     if (success) {
+      logger.log('ETL process started successfully');
       res.status(200).json({ message: 'ETL process started successfully' });
     } else {
+      logger.error('ETL process failed');
       res.status(500).json({ error: 'ETL process failed' });
     }
   } catch (error) {
-    console.error('Error running ETL process:', error);
+    logger.error(`Error running ETL process: ${error}`);
     res.status(500).json({ error: 'Internal server error' });
   }
 }

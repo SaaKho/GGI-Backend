@@ -1,19 +1,22 @@
 import { Pool } from 'pg';
 import { TransformedCountry, Currency, Language } from '../types/country';
 import { config } from '../config';
+import { ConsoleLogger } from '../utils/logging/consoleLogger';
 
 export class CountryLoader {
   private pool: Pool;
+  private logger: ConsoleLogger;
 
   constructor() {
     this.pool = new Pool({
       connectionString: config.databaseUrl,
       ssl: config.nodeEnv === 'production' ? { rejectUnauthorized: false } : false,
     });
+    this.logger = new ConsoleLogger();
   }
 
   async load(transformedCountries: TransformedCountry[]): Promise<void> {
-    console.log(`Loading ${transformedCountries.length} countries to database`);
+    this.logger.log(`Loading ${transformedCountries.length} countries to database`);
 
     const client = await this.pool.connect();
 
@@ -67,11 +70,11 @@ export class CountryLoader {
 
       // Commit transaction
       await client.query('COMMIT');
-      console.log('Data loaded successfully');
+      this.logger.log('Data loaded successfully');
     } catch (error) {
       // Rollback in case of error
       await client.query('ROLLBACK');
-      console.error('Error loading data to database:', error);
+      this.logger.error(`Error loading data to database: ${error}`);
       throw new Error('Failed to load countries data to database');
     } finally {
       client.release();

@@ -1,28 +1,33 @@
 import axios from 'axios';
 import { config } from '../config';
 import { RawCountryData } from '../types/country';
+import { ConsoleLogger } from '../utils/logging/consoleLogger';
 
 export class CountryExtractor {
   private apiUrl: string;
+  private logger: ConsoleLogger;
 
   constructor() {
     this.apiUrl = config.countriesApiUrl || 'https://restcountries.com/v3.1/all';
+    this.logger = new ConsoleLogger();
   }
 
   async extract(): Promise<RawCountryData[]> {
     try {
-      console.log(`Extracting data from ${this.apiUrl}`);
+      this.logger.log(`Extracting data from ${this.apiUrl}`);
       const response = await axios.get<RawCountryData[]>(this.apiUrl);
-      console.log(`Successfully extracted ${response.data.length} countries`);
+      this.logger.log(`Successfully extracted ${response.data.length} countries`);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.error(`API extraction error: ${error.message}`);
+        this.logger.error(`API extraction error: ${error.message}`);
         if (error.response) {
-          console.error(`Status: ${error.response.status}, Data:`, error.response.data);
+          this.logger.error(
+            `Status: ${error.response.status}, Data: ${JSON.stringify(error.response.data)}`
+          );
         }
       } else {
-        console.error('Unknown extraction error:', error);
+        this.logger.error('Unknown extraction error:, ${error}');
       }
       throw new Error('Failed to extract countries data');
     }

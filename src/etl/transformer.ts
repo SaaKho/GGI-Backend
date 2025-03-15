@@ -1,8 +1,15 @@
 import { RawCountryData, TransformedCountry, Currency, Language } from '../types/country';
+import { ConsoleLogger } from '../utils/logging/consoleLogger';
 
 export class CountryTransformer {
+  private logger: ConsoleLogger;
+
+  constructor() {
+    this.logger = new ConsoleLogger();
+  }
+
   transform(rawCountries: RawCountryData[]): TransformedCountry[] {
-    console.log(`Transforming ${rawCountries.length} countries`);
+    this.logger.log(`Transforming ${rawCountries.length} countries`);
 
     return rawCountries.map(country => {
       // Extract and flatten nested structures
