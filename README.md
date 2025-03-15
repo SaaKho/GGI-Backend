@@ -220,4 +220,54 @@ collections/ggi-be-task/
 
 ## 📌 Bruno Collection Location
 All tested API collections are stored in:
+## 📌 Server & API Testing Screenshots
+
+### **Bruno API Testing**
+Here is a screenshot showing **API testing in Bruno**:
+
+![Bruno Server Test](assets/bruno-server.png)
+
+### **API Filters (By Region)**
+Example of filtering **countries by region**:
+
+![By Region](assets/byRegion.png)
+
+### **API Filters (Partial Match)**
+Search countries **using partial name filters**:
+
+![Partial Filter](assets/partialFilter.png)
+
+---
+
+## 📌 APM Monitoring with New Relic
+This project uses **New Relic APM** for **performance monitoring, logs, and error tracking**.
+
+### **New Relic Dashboard**
+Here is an example of the **New Relic monitoring dashboard**:
+
+![New Relic Dashboard](assets/newrelic.png)
+
+### **New Relic Traces**
+Detailed **transaction tracing** for API requests:
+
+![New Relic Traces](assets/newrelic2.png)
+
+### **New Relic Logs**
+Captured logs inside **New Relic Log Monitoring**:
+
+![New Relic Logs](assets/newrelic3.png)
+
+---
+
+## 📌 Error Monitoring with Sentry
+This backend also integrates **Sentry** for error tracking.
+
+![Sentry Dashboard](assets/sentry.png)
+
+---
+
+## 📌 Running the API
+To start the backend API, run:
+```sh
+npm run dev
 
