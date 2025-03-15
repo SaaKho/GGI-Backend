@@ -11,5 +11,5 @@
     "noEmitOnError": true, // Prevents emitting output files if there are any TypeScript compilation errors.
     "removeComments": true // Removes comments from the output JavaScript files.
   },
-  "include": ["src/**/*", "instrument.js"]
+  "include": ["src/**/*","src/tests/**/*", "instrument.js", "jest.config.js"]
 }
