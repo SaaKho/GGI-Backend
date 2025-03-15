@@ -225,7 +225,8 @@ All tested API collections are stored in:
 ### **Bruno API Testing**
 Here is a screenshot showing **API testing in Bruno**:
 
-![Bruno Server Test](assets/bruno-server.png)
+<img src="assets/bruno-server.png" alt="Bruno Server Test" width="600"/>
+
 
 ### **API Filters (By Region)**
 Example of filtering **countries by region**:
