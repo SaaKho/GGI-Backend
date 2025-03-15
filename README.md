@@ -63,9 +63,56 @@ This project was developed as part of a technical assessment to evaluate skills 
 - **API Testing**: Bruno
 - **Monitoring**: NewRelic, Sentry
 - **Code Quality**: ESLint, Prettier
-- **API Documentation**: Swagger/OpenAPI (planned)
 
 ## Project Structure
 
+# Project Structure
+
 The project follows a clean, modular architecture with clear separation of concerns:
-├── src/ │ ├── api/ # API components │ │ ├── controllers.ts # Request handlers │ │ ├── routes.ts # API route definitions │ ├── config/ # Configuration files │ │ ├── config.ts # App settings │ ├── db/ # Database components │ │ ├── connection.ts # Database connection │ ├── etl/ # ETL pipeline components │ │ ├── extractor.ts # Data extraction │ │ ├── transformer.ts # Data transformation │ │ ├── loader.ts # Database loading │ │ ├── pipeline.ts # ETL orchestration │ ├── middleware/ # Express middleware │ │ ├── validateRequest.ts # Request validation middleware │ ├── repositories/ # Database interaction layer │ │ ├── countryRepository.ts # Country-specific queries │ ├── scheduler/ # Scheduled tasks │ │ ├── jobs.ts # Cron job definitions │ ├── services/ # Business logic │ │ ├── countryService.ts # Country service layer │ ├── types/ # TypeScript types │ │ ├── country.ts # Country data types │ ├── utils/ # Utility functions │ │ ├── logging/ # Logging system │ │ │ ├── consoleLogger.ts # Console logger │ │ │ ├── logger.ts # Generic logger │ │ ├── pagination/ # Pagination helper │ │ │ ├── pagination.ts # Pagination logic │ ├── validations/ # Request validation │ │ ├── countryValidation.ts # Country API validation │ │ ├── etlValidation.ts # ETL process validation │ ├── index.ts # Application entry point ├── .env # Environment variables ├── .eslintrc.js # ESLint configuration ├── .gitignore # Git ignored files ├── .prettierrc # Prettier configuration ├── newrelic.cjs # NewRelic monitoring ├── newrelic_agent.log # NewRelic logs ├── instrument.js # Instrumentation scripts ├── tsconfig.json # TypeScript configuration ├── package.json # Project dependencies ├── package-lock.json # Dependency lock file └── README.md # Project documentation
+
+```bash
+src/
+├── api/               # API components
+│   ├── controllers.ts # Request handlers
+│   ├── routes.ts      # API route definitions
+├── config/            # Configuration files
+│   ├── config.ts      # App settings
+├── db/                # Database components
+│   ├── connection.ts  # Database connection
+├── etl/               # ETL pipeline components
+│   ├── extractor.ts   # Data extraction
+│   ├── transformer.ts # Data transformation
+│   ├── loader.ts      # Database loading
+│   ├── pipeline.ts    # ETL orchestration
+├── middleware/        # Express middleware
+│   ├── validateRequest.ts  # Request validation middleware
+├── repositories/      # Database interaction layer
+│   ├── countryRepository.ts # Country-specific queries
+├── scheduler/         # Scheduled tasks
+│   ├── jobs.ts        # Cron job definitions
+├── services/          # Business logic
+│   ├── countryService.ts  # Country service layer
+├── types/             # TypeScript types
+│   ├── country.ts     # Country data types
+├── utils/             # Utility functions
+│   ├── logging/       # Logging system
+│   │   ├── consoleLogger.ts # Console logger
+│   │   ├── logger.ts        # Generic logger
+│   ├── pagination/    # Pagination helper
+│   │   ├── pagination.ts  # Pagination logic
+├── validations/       # Request validation
+│   ├── countryValidation.ts  # Country API validation
+│   ├── etlValidation.ts      # ETL process validation
+├── index.ts           # Application entry point
+├── .env               # Environment variables
+├── .eslintrc.js       # ESLint configuration
+├── .gitignore         # Git ignored files
+├── .prettierrc        # Prettier configuration
+├── newrelic.cjs       # NewRelic monitoring
+├── newrelic_agent.log # NewRelic logs
+├── instrument.js      # Instrumentation scripts
+├── tsconfig.json      # TypeScript configuration
+├── package.json       # Project dependencies
+├── package-lock.json  # Dependency lock file
+└── README.md          # Project documentation
+
