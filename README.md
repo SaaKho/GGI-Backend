@@ -226,6 +226,7 @@ All tested API collections are stored in:
 Here is a screenshot showing **API testing in Bruno**:
 
 ![Bruno Server](assets/bruno-server.png)
+![Bruno Server](https://github.com/SaaKho/GGI-Backend/blob/main/assets/bruno-server.png?raw=true)
 
 
 
