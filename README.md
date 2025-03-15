@@ -1,18 +1,59 @@
-# GGI-Backend
 # REST Countries ETL Pipeline
 
-An ETL (Extract, Transform, Load) pipeline that fetches data from the REST Countries API, processes it, and exposes it through a RESTful API.
+## Project Overview
 
-![Project Architecture](path/to/architecture-diagram.png)
+This project implements a complete ETL (Extract, Transform, Load) pipeline that fetches data from the REST Countries API, processes it through a sophisticated transformation layer, stores it in a PostgreSQL database, and exposes the data through a well-designed RESTful API. The implementation follows industry best practices for code organization, error handling, and performance optimization.
 
-## Features
+![Project Architecture](https://i.imgur.com/IEV2Nm7.png)
 
-- **Extract**: Fetches country data from the REST Countries API
-- **Transform**: Normalizes nested fields, adds computed fields, and cleans unnecessary data
-- **Load**: Stores processed data in a PostgreSQL database with an optimized schema
-- **RESTful API**: Exposes endpoints for querying the data with filtering and pagination
-- **Scheduled Updates**: Automatically refreshes data on a configurable schedule
-- **Monitoring**: Integrated with NewRelic and Sentry for performance and error tracking
+## Background
+
+### The REST Countries API
+
+The [REST Countries API](https://restcountries.com/) is a public API that provides detailed information about countries around the world. It offers comprehensive data including:
+
+- Basic country information (name, capital, population)
+- Geographical data (region, subregion, area, borders)
+- Economic information (currencies)
+- Cultural data (languages, flag)
+- And much more
+
+This API is widely used in applications that require country-related information, from dropdown selectors to detailed geographical analysis tools.
+
+### Technical Assignment Context
+
+This project was developed as part of a technical assessment to evaluate skills in:
+
+1. **ETL Pipeline Design**: Building an efficient data pipeline that extracts data from external sources, transforms it to meet business requirements, and loads it into a database.
+2. **API Development**: Creating a RESTful API with features like filtering and pagination.
+3. **Project Structure**: Organizing code following clean architecture principles with separation of concerns.
+4. **Best Practices**: Implementing logging, error handling, validation, and documentation.
+5. **Performance Optimization**: Ensuring the application scales well and performs efficiently.
+
+## Key Features
+
+- **Complete ETL Pipeline**:
+  - **Extract**: Fetches country data from the REST Countries API with robust error handling
+  - **Transform**: Normalizes nested fields (currencies, languages), adds computed fields (population density), and cleans unnecessary data
+  - **Load**: Stores processed data in PostgreSQL with an optimized schema design
+
+- **RESTful API**:
+  - Comprehensive endpoints following REST principles
+  - Advanced filtering capabilities
+  - Efficient pagination implementation
+  - Consistent response formatting
+
+- **Automation & Scheduling**:
+  - Configurable scheduler for periodic data refreshes
+  - Initial data load on application startup
+  - Manual trigger endpoint for on-demand processing
+
+- **Production-Ready Features**:
+  - Comprehensive logging system
+  - Performance monitoring with NewRelic
+  - Error tracking with Sentry
+  - Detailed documentation
+  - API testing with Bruno
 
 ## Technology Stack
 
@@ -22,104 +63,9 @@ An ETL (Extract, Transform, Load) pipeline that fetches data from the REST Count
 - **API Testing**: Bruno
 - **Monitoring**: NewRelic, Sentry
 - **Code Quality**: ESLint, Prettier
+- **API Documentation**: Swagger/OpenAPI (planned)
 
 ## Project Structure
-## Project Structure
-├── src/
-│   ├── api/               # API components
-│   │   ├── controllers.ts # Request handlers
-│   │   ├── routes.ts      # API route definitions
-│   ├── config/            # Configuration files
-│   │   ├── config.ts      # App settings
-│   ├── db/                # Database components
-│   │   ├── connection.ts  # Database connection
-│   ├── etl/               # ETL pipeline components
-│   │   ├── extractor.ts   # Data extraction
-│   │   ├── transformer.ts # Data transformation
-│   │   ├── loader.ts      # Database loading
-│   │   ├── pipeline.ts    # ETL orchestration
-│   ├── middleware/        # Express middleware
-│   │   ├── validateRequest.ts  # Request validation middleware
-│   ├── repositories/      # Database interaction layer
-│   │   ├── countryRepository.ts # Country-specific queries
-│   ├── scheduler/         # Scheduled tasks
-│   │   ├── jobs.ts        # Cron job definitions
-│   ├── services/          # Business logic
-│   │   ├── countryService.ts  # Country service layer
-│   ├── types/             # TypeScript types
-│   │   ├── country.ts     # Country data types
-│   ├── utils/             # Utility functions
-│   │   ├── logging/       # Logging system
-│   │   │   ├── consoleLogger.ts # Console logger
-│   │   │   ├── logger.ts        # Generic logger
-│   │   ├── pagination/    # Pagination helper
-│   │   │   ├── pagination.ts  # Pagination logic
-│   ├── validations/       # Request validation
-│   │   ├── countryValidation.ts  # Country API validation
-│   │   ├── etlValidation.ts      # ETL process validation
-│   ├── index.ts           # Application entry point
-├── .env                   # Environment variables
-├── .eslintrc.js           # ESLint configuration
-├── .gitignore             # Git ignored files
-├── .prettierrc            # Prettier configuration
-├── newrelic.cjs           # NewRelic monitoring
-├── newrelic_agent.log      # NewRelic logs
-├── instrument.js          # Instrumentation scripts
-├── tsconfig.json          # TypeScript configuration
-├── package.json           # Project dependencies
-├── package-lock.json      # Dependency lock file
-└── README.md              # Project documentation
 
-## Setup Instructions
-
-### Prerequisites
-
-- Node.js (v14 or later)
-- PostgreSQL database
-- Git
-
-### Installation
-
-1. Clone the repository
-git clone https://github.com/SaaKho/GGI-Backend.git
-cd Backend
-npm run dev
-
-2. Install dependencies
-npm install 
-
-3. Create and configure the `.env` file
---You can ask for the .env to get access but it is advised to Update the `.env` file with your database credentials and other configuration options:
-
-API Configuration
-COUNTRIES_API_URL=https://restcountries.com/v3.1/all
-
-4. Create the PostgreSQL database
-Database Configuration
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=[database name]
-DB_USER=postgres
-DB_PASSWORD=[your password]
-DATABASE_URL=postgresql://postgres:your_password@localhost:5432/countries_db
-
-API Server Configuration
-PORT=3000
-NODE_ENV=development
-
-5. Build the TypeScript code
-npm run build
-
-### Running the Application
-
-Start the application:
-npm start
-
-For development with auto-reload:
-npm run dev
-
-
-
-
-
-
+The project follows a clean, modular architecture with clear separation of concerns:
+├── src/ │ ├── api/ # API components │ │ ├── controllers.ts # Request handlers │ │ ├── routes.ts # API route definitions │ ├── config/ # Configuration files │ │ ├── config.ts # App settings │ ├── db/ # Database components │ │ ├── connection.ts # Database connection │ ├── etl/ # ETL pipeline components │ │ ├── extractor.ts # Data extraction │ │ ├── transformer.ts # Data transformation │ │ ├── loader.ts # Database loading │ │ ├── pipeline.ts # ETL orchestration │ ├── middleware/ # Express middleware │ │ ├── validateRequest.ts # Request validation middleware │ ├── repositories/ # Database interaction layer │ │ ├── countryRepository.ts # Country-specific queries │ ├── scheduler/ # Scheduled tasks │ │ ├── jobs.ts # Cron job definitions │ ├── services/ # Business logic │ │ ├── countryService.ts # Country service layer │ ├── types/ # TypeScript types │ │ ├── country.ts # Country data types │ ├── utils/ # Utility functions │ │ ├── logging/ # Logging system │ │ │ ├── consoleLogger.ts # Console logger │ │ │ ├── logger.ts # Generic logger │ │ ├── pagination/ # Pagination helper │ │ │ ├── pagination.ts # Pagination logic │ ├── validations/ # Request validation │ │ ├── countryValidation.ts # Country API validation │ │ ├── etlValidation.ts # ETL process validation │ ├── index.ts # Application entry point ├── .env # Environment variables ├── .eslintrc.js # ESLint configuration ├── .gitignore # Git ignored files ├── .prettierrc # Prettier configuration ├── newrelic.cjs # NewRelic monitoring ├── newrelic_agent.log # NewRelic logs ├── instrument.js # Instrumentation scripts ├── tsconfig.json # TypeScript configuration ├── package.json # Project dependencies ├── package-lock.json # Dependency lock file └── README.md # Project documentation
