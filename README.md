@@ -225,8 +225,8 @@ All tested API collections are stored in:
 ### **Bruno API Testing**
 Here is a screenshot showing **API testing in Bruno**:
 
-![Bruno Server](assets/bruno-server.png)
-![Bruno Server](https://github.com/SaaKho/GGI-Backend/blob/main/assets/bruno-server.png?raw=true)
+![test-server](https://github.com/user-attachments/assets/0d31ffdd-a728-4a2f-ac44-4cfab1fcba96)
+
 
 
 
@@ -234,14 +234,12 @@ Here is a screenshot showing **API testing in Bruno**:
 ### **API Filters (By Region)**
 Example of filtering **countries by region**:
 
-![By Region](assets/byRegion.png)
+![byRegion](https://github.com/user-attachments/assets/4534ef63-09a0-46ee-ba4f-1113a0997ff0)
 
 ### **API Filters (Partial Match)**
 Search countries **using partial name filters**:
-
-![Partial Filter](assets/partialFilter.png)
-
 ---
+![partialFilter](https://github.com/user-attachments/assets/27655cf8-f967-4d03-a0c5-484f27ee9485)
 
 ## 📌 APM Monitoring with New Relic
 This project uses **New Relic APM** for **performance monitoring, logs, and error tracking**.
@@ -249,26 +247,34 @@ This project uses **New Relic APM** for **performance monitoring, logs, and erro
 ### **New Relic Dashboard**
 Here is an example of the **New Relic monitoring dashboard**:
 
-![New Relic Dashboard](assets/newrelic.png)
+![newrelic](https://github.com/user-attachments/assets/f2f7a610-094e-4705-a6b7-218753ce68d5)
+
 
 ### **New Relic Traces**
 Detailed **transaction tracing** for API requests:
 
-![New Relic Traces](assets/newrelic2.png)
+
+![newrelic2](https://github.com/user-attachments/assets/0d7a3c70-8412-4b5b-a860-9af221efbe27)
 
 ### **New Relic Logs**
 Captured logs inside **New Relic Log Monitoring**:
 
-![New Relic Logs](assets/newrelic3.png)
+
+![newrelic3](https://github.com/user-attachments/assets/dae9101f-d2ed-434e-b7e6-3f142e201979)
 
 ---
 
 ## 📌 Error Monitoring with Sentry
 This backend also integrates **Sentry** for error tracking.
 
-![Sentry Dashboard](assets/sentry.png)
 
----
+
+---![sentry](https://github.com/user-attachments/assets/125781e3-e0f9-4108-95b7-2298b5158230)
+
+Jest Testing coverage Results:
+
+
+![test-results](https://github.com/user-attachments/assets/793b7d4c-54e8-4764-9e8a-78026e2a1f4c)
 
 ## 📌 Running the API
 To start the backend API, run:
