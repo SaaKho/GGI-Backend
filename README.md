@@ -229,6 +229,8 @@ Here is a screenshot showing **API testing in Bruno**:
 <img src="./backend/assets/bruno-server.png" alt="Bruno Server Test" width="600"/>
 ![By Region](./backend/assets/byRegion.png)
 ![By Region](https://raw.githubusercontent.com/SaaKho/GGI-Backend/main/backend/assets/byRegion.png)
+![By Region](https://raw.githubusercontent.com/SaaKho/GGI-Backend/main/assets/byRegion.png)
+
 
 
 
