@@ -116,3 +116,46 @@ src/
 ├── package-lock.json  # Dependency lock file
 └── README.md          # Project documentation
 
+## ETL Pipeline Implementation
+
+Our ETL pipeline is designed for performance, reliability, and maintainability:
+
+### Extract
+
+- Fetches data from the REST Countries API using axios
+- Implements retry mechanisms for resilience
+- Handles API rate limiting and connectivity issues
+- Detailed logging for troubleshooting
+
+### Transform
+
+The transformation layer performs several operations:
+
+1. **Normalization**: Flattens complex nested structures
+2. **Data Enrichment**: Adds computed fields like population density
+3. **Data Cleaning**: Removes unnecessary fields to optimize storage
+4. **Data Validation**: Ensures data quality before loading
+
+### Load
+
+- Implements an efficient database schema
+- Handles data upserts to avoid duplicates
+- Maintains relationships between entities
+- Optimized for query performance
+
+### Scheduling
+
+The ETL process runs:
+- On application startup
+- On a configurable schedule (default: daily at midnight)
+- On-demand via API endpoint
+
+## API Documentation
+
+### Endpoints
+
+#### Get All Countries
+####GetWithPagination 
+#### TestServer
+#### check the ETL running server
+
