@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "ggi-be-task",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
